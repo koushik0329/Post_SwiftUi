@@ -9,23 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var postViewModel : PostNewsModel
+    var postViewModel : PostNewsModel
+    @State var path = NavigationPath()
     
     init(postViewModel : PostNewsModel){
         self.postViewModel = postViewModel
     }
     
     var body: some View {
-        NavigationStack{
+        NavigationStack(path : $path){
             VStack {
                 Text("Person")
                     .font(.title)
                 
                 List(postViewModel.posts, id: \.id) { post in
-                    NavigationLink(destination: DetailsView(description: post.description)){
+                    Button {
+                        path.append(post)
+                    } label: {
                         RowView(id: post.id, title: post.title, description: post.description
                         )
                     }
+                }
+                .navigationDestination(for: Person.self) { post in
+                    DetailsView(description: post.description)
                 }
             }
             .task {

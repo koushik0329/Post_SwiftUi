@@ -7,9 +7,10 @@
 
 import UIKit
 
-class PostNewsModel: ObservableObject {
+@Observable
+class PostNewsModel{
     
-    @Published var posts : [Person] = []
+    var posts : [Person] = []
     
     let networkObj : Network
     

@@ -11,7 +11,7 @@ import SwiftUI
 struct Post_SiwftUiApp: App {
     var body: some Scene {
         WindowGroup {
-            let viewModel = PostNewsModel(networkObj: NetworkManager.shared)
+            var viewModel = PostNewsModel(networkObj: NetworkManager.shared)
             
             ContentView(postViewModel: viewModel)
         }
